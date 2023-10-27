@@ -8,6 +8,7 @@ import StepOne from '../containers/StepOne';
 import StepTwo from '../containers/StepTwo';
 import StepThree from '../containers/StepThree';
 import CoffeeCardPreview from '../containers/CoffeeCardPreview';
+import CodeModal from '../components/CodeModal';
 
 const CoffeeBanner = () => {
   const { palette } = useTheme();
@@ -17,6 +18,7 @@ const CoffeeBanner = () => {
   const [coffeeType, setCoffeeType] = useState<CoffeeType>(CoffeeType.HOT);
   const [selectedCoffeeId, setSelectedCoffeeId] = useState<string>('');
   const [selectedCoffee, setSelectedCoffee] = useState<Partial<Coffee>>({});
+  const [modal, setModal] = useState<boolean>(false);
 
   const htmlCode = useMemo(() => {
     if (Object.keys(selectedCoffee).length) {
@@ -83,6 +85,9 @@ const CoffeeBanner = () => {
 
   return (
     <Box p={3}>
+      {modal && (
+        <CodeModal handleClose={() => setModal(false)} htmlCode={htmlCode} />
+      )}
       <Introduction />
       <Grid container>
         <Grid item xs={12} md={7}>
@@ -108,7 +113,7 @@ const CoffeeBanner = () => {
             <StepThree
               setSelectedCoffee={setSelectedCoffee}
               selectedCoffee={selectedCoffee}
-              showCode={() => {}}
+              showCode={() => setModal(true)}
               resetForm={resetForm}
             />
           )}
