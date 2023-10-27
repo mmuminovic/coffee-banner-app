@@ -9,7 +9,7 @@ interface StepCardProps {
 const StepCard: React.FC<StepCardProps> = ({ title, children }) => {
   const { palette } = useTheme();
   return (
-    <Box borderRadius={'8px'} bgcolor={palette.common.white}>
+    <Box borderRadius={'8px'} bgcolor={palette.common.white} my={4}>
       <Box
         p={2}
         bgcolor={palette.secondary.main}
